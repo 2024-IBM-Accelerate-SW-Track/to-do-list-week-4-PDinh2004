@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useEffect } from "react";
 import Todos from "../component/todos";
 import AddTodo from "../component/AddTodo";
 import "../pages/Home.css";
@@ -10,7 +10,17 @@ class Home extends Component {
     this.state = {
       todos: [],
     };
-  }
+  };
+
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     const response = await fetch("http://localhost:3001/get/items");
+  //     const data = await response.json();
+  //     this.setState({
+  //       todos: data,
+  //     });
+  //   };
+  // }, []);
 
   // the deleteTodo function simply creates a new array that removes the todo item selected from the user from the list
   // and then updates the state with the new list.
@@ -29,7 +39,7 @@ class Home extends Component {
   // updates the state with the new list.
   addTodo = (todo) => {
     const exists = this.state.todos.find(t => t.content === todo.content);
-    if (exists || todo.duedate == null || todo.duedate === "Invalid Date"){ return }
+    if (exists || todo.duedate == null || todo.duedate === "Invalid Date") { return }
     // In React, keys or ids in a list help identify which items have changed, been added or removed. Keys
     // should not share duplicate values.
     // To avoid having dup values, we use the Math.random() function to generate a random value for a todo id.
